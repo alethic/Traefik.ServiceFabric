@@ -33,7 +33,7 @@ steps:
   displayName: Stage Traefik.ServiceFabric
   inputs:
     solution: Traefik.ServiceFabric.sln
-    msbuildArgs: /t:Traefik_ServiceFabric:Package /p:PackageLocation=$(Build.ArtifactStagingDirectory)\Traefik.ServiceFabric
+    msbuildArgs: /t:Traefik:Package /p:PackageLocation=$(Build.ArtifactStagingDirectory)\Traefik.ServiceFabric
     platform: $(BuildPlatform)
     configuration: $(BuildConfiguration)
 
