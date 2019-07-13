@@ -5,9 +5,9 @@ defaultEntryPoints = [ "http" ]
 
 [entryPoints]
 [entryPoints.traefik]
-address = ":19188"
+address = ":%TraefikApiPort%"
 [entryPoints.http]
-address = ":19180"
+address = ":%TraefikPort%"
 
 [api]
 entryPoint = "traefik"
