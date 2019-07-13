@@ -16,13 +16,13 @@ steps:
 - task: NuGetCommand@2
   displayName: 'NuGet restore'
   inputs:
-    restoreSolution: src/Traefik.ServiceFabric.sln
+    restoreSolution: Traefik.ServiceFabric.sln
     vstsFeed: '74a5a491-5c25-48f8-a89a-00d9eded165b'
 
 - task: VSBuild@1
   displayName: Build Solution
   inputs:
-    solution: src/Traefik.ServiceFabric.sln
+    solution: Traefik.ServiceFabric.sln
     vsVersion: 16.0
     platform: $(BuildPlatform)
     configuration: $(BuildConfiguration)
@@ -32,7 +32,7 @@ steps:
 - task: VSBuild@1
   displayName: Stage Traefik.ServiceFabric
   inputs:
-    solution: src/Traefik.ServiceFabric.sln
+    solution: Traefik.ServiceFabric.sln
     msbuildArgs: /t:Traefik_ServiceFabric:Package /p:PackageLocation=$(Build.ArtifactStagingDirectory)\Traefik.ServiceFabric
     platform: $(BuildPlatform)
     configuration: $(BuildConfiguration)
