@@ -9,9 +9,9 @@ variables:
 
 steps:
 - task: NuGetToolInstaller@0
-  displayName: 'Use NuGet 5.0.2'
+  displayName: 'Use NuGet 4.9.4'
   inputs:
-    versionSpec: 5.0.2
+    versionSpec: 4.9.4
 
 - task: NuGetCommand@2
   displayName: 'NuGet restore'
