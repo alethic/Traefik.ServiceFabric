@@ -13,8 +13,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
-using Microsoft.ServiceFabric.Client;
-using Microsoft.ServiceFabric.Client.Http;
 using Microsoft.ServiceFabric.Common.Security;
 
 namespace Traefik.FabricApi

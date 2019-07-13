@@ -16,11 +16,17 @@
     <CodePackage Name="Code" Version="1.0.0">
         <EntryPoint>
             <ExeHost>
-                <Program>traefik-appinsights-watchdog.exe</Program>
-                <Arguments>--appinsightskey=__YOUKEYHERE__ --watchdogtestserverport=19182 --pollintervalsec=60 --debug=true</Arguments>
+                <Program>traefik-appinsights-watchdog.bat</Program>
                 <WorkingFolder>CodePackage</WorkingFolder>
+                <ConsoleRedirection FileRetentionCount="2" />
             </ExeHost>
         </EntryPoint>
+        <EnvironmentVariables>
+            <EnvironmentVariable Name="TraefikPort" Value="19180" />
+            <EnvironmentVariable Name="TraefikApiPort" Value="19188" />
+            <EnvironmentVariable Name="PollIntervalSec" Value="60" />
+            <EnvironmentVariable Name="AppInsightsKey" Value="__APIKEY__" />
+        </EnvironmentVariables>
     </CodePackage>
     <Resources>
         <Endpoints>
