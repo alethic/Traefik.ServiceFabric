@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ServiceManifest
+    Name="Traefik.FabricApi"
+    Version="1.0.0"
+    xmlns="http://schemas.microsoft.com/2011/01/fabric"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+
+    <ServiceTypes>
+        <StatelessServiceType ServiceTypeName="Traefik.FabricApi" />
+    </ServiceTypes>
+
+    <CodePackage Name="Code" Version="1.0.0">
+        <EntryPoint>
+            <ExeHost>
+                <Program>Traefik.FabricApi.exe</Program>
+                <WorkingFolder>CodePackage</WorkingFolder>
+            </ExeHost>
+        </EntryPoint>
+        <EnvironmentVariables>
+            <EnvironmentVariable Name="ASPNETCORE_ENVIRONMENT" Value=""/>
+        </EnvironmentVariables>
+    </CodePackage>
+
+    <ConfigPackage Name="Config" Version="1.0.0" />
+
+    <Resources>
+        <Endpoints>
+            <Endpoint Protocol="http" Name="ServiceEndpoint" Type="Input" Port="19181" />
+        </Endpoints>
+    </Resources>
+</ServiceManifest>

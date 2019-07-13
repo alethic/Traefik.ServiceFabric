@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" InitialTargets=";ValidateMSBuildFiles">
-  <Import Project="..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.1\build\Microsoft.VisualStudio.Azure.Fabric.Application.props" Condition="Exists('..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.1\build\Microsoft.VisualStudio.Azure.Fabric.Application.props')" />
+  <Import Project="..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.8\build\Microsoft.VisualStudio.Azure.Fabric.Application.props" Condition="Exists('..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.8\build\Microsoft.VisualStudio.Azure.Fabric.Application.props')" />
   <PropertyGroup Label="Globals">
     <ProjectGuid>45a9adb0-20a2-4d36-9c0a-483e9098506d</ProjectGuid>
-    <ProjectVersion>1.7</ProjectVersion>
+    <ProjectVersion>2.1</ProjectVersion>
     <MinToolsVersion>1.5</MinToolsVersion>
-    <SupportedMSBuildNuGetPackageVersion>1.6</SupportedMSBuildNuGetPackageVersion>
+    <SupportedMSBuildNuGetPackageVersion>1.6.8</SupportedMSBuildNuGetPackageVersion>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
   </PropertyGroup>
   <ItemGroup Label="ProjectConfigurations">
@@ -28,10 +28,10 @@
     <None Include="Scripts\Get-TraefikBinary.ps1" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="ApplicationPackageRoot\TraefikPkg\Code\traefik.exe" />
-    <Content Include="ApplicationPackageRoot\TraefikPkg\Config\Settings.xml" />
-    <Content Include="ApplicationPackageRoot\TraefikPkg\Code\traefik.toml" />
-    <Content Include="ApplicationPackageRoot\TraefikPkg\ServiceManifest.xml" />
+    <Content Include="ApplicationPackageRoot\Traefik\Code\traefik.exe" />
+    <Content Include="ApplicationPackageRoot\Traefik\Config\Settings.xml" />
+    <Content Include="ApplicationPackageRoot\Traefik\Code\traefik.toml" />
+    <Content Include="ApplicationPackageRoot\Traefik\ServiceManifest.xml" />
     <Content Include="ApplicationPackageRoot\Watchdog\Code\traefik-appinsights-watchdog.exe" />
     <Content Include="ApplicationPackageRoot\Watchdog\ServiceManifest.xml" />
     <Content Include="ApplicationParameters\Cloud.xml" />
@@ -39,16 +39,21 @@
     <Content Include="PublishProfiles\Cloud.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ApplicationPackageRoot\TraefikPkg\Code\certs\" />
+    <ProjectReference Include="..\Traefik.FabricApi\Traefik.FabricApi.csproj">
+      <ServiceLaunchUrl>http://{MachineName}:{ServicePort}/api/values</ServiceLaunchUrl>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
   <PropertyGroup>
     <ApplicationProjectTargetsPath>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Service Fabric Tools\Microsoft.VisualStudio.Azure.Fabric.ApplicationProject.targets</ApplicationProjectTargetsPath>
   </PropertyGroup>
   <Import Project="$(ApplicationProjectTargetsPath)" Condition="Exists('$(ApplicationProjectTargetsPath)')" />
-  <Import Project="..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.1\build\Microsoft.VisualStudio.Azure.Fabric.Application.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.1\build\Microsoft.VisualStudio.Azure.Fabric.Application.targets')" />
-  <Target Name="ValidateMSBuildFiles">
-    <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.1\build\Microsoft.VisualStudio.Azure.Fabric.Application.props')" Text="Unable to find the '..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.1\build\Microsoft.VisualStudio.Azure.Fabric.Application.props' file. Please restore the 'Microsoft.VisualStudio.Azure.Fabric.MSBuild' Nuget package" />
-    <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.1\build\Microsoft.VisualStudio.Azure.Fabric.Application.targets')" Text="Unable to find the '..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.1\build\Microsoft.VisualStudio.Azure.Fabric.Application.targets' file. Please restore the 'Microsoft.VisualStudio.Azure.Fabric.MSBuild' Nuget package" />
+  <Import Project="..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.8\build\Microsoft.VisualStudio.Azure.Fabric.Application.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.8\build\Microsoft.VisualStudio.Azure.Fabric.Application.targets')" />
+  <Target Name="ValidateMSBuildFiles" BeforeTargets="PrepareForBuild">
+    <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.8\build\Microsoft.VisualStudio.Azure.Fabric.Application.props')" Text="Unable to find the '..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.8\build\Microsoft.VisualStudio.Azure.Fabric.Application.props' file. Please restore the 'Microsoft.VisualStudio.Azure.Fabric.MSBuild' Nuget package." />
+    <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.8\build\Microsoft.VisualStudio.Azure.Fabric.Application.targets')" Text="Unable to find the '..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.8\build\Microsoft.VisualStudio.Azure.Fabric.Application.targets' file. Please restore the 'Microsoft.VisualStudio.Azure.Fabric.MSBuild' Nuget package." />
+  </Target>
+  <Target Name="GetTraefikBinary" BeforeTargets="Build" Condition="!Exists('ApplicationPackageRoot\Traefik\Code\traefik.exe')">
+    <Exec Command="powershell.exe Scripts\Get-TraefikBinary.ps1 -version v1.7.12" />
   </Target>
 </Project>

@@ -1,0 +1,18 @@
+debug = true
+logLevel = "INFO"
+defaultEntryPoints = [ "http" ]
+
+[entryPoints]
+[entryPoints.traefik]
+address = ":19188"
+[entryPoints.http]
+address = ":19180"
+
+[api]
+entryPoint = "traefik"
+dashboard = true
+debug = true
+
+[servicefabric]
+clustermanagementurl = "http://localhost:19181"
+apiversion = "3.0"
