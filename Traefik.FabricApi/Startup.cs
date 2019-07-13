@@ -11,6 +11,7 @@ using Cogito.Autofac;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
 using Microsoft.ServiceFabric.Common.Security;
@@ -119,6 +120,7 @@ namespace Traefik.FabricApi
                 using (var response = await client.SendAsync(request))
                 {
                     context.Response.StatusCode = (int)response.StatusCode;
+                    context.Response.HttpContext.Features.Get<IHttpResponseFeature>().ReasonPhrase = response.ReasonPhrase;
 
                     // copy response headers from API
                     foreach (var h in response.Headers)
