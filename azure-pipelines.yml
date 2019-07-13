@@ -32,8 +32,8 @@ steps:
 - task: VSBuild@1
   displayName: Stage Traefik.ServiceFabric
   inputs:
-    solution: Traefik.ServiceFabric.sln
-    msbuildArgs: /t:Traefik:Package /p:PackageLocation=$(Build.ArtifactStagingDirectory)\Traefik.ServiceFabric
+    solution: Traefik\Traefik.sfproj
+    msbuildArgs: /t:Package /p:PackageLocation=$(Build.ArtifactStagingDirectory)\Traefik.ServiceFabric
     platform: $(BuildPlatform)
     configuration: $(BuildConfiguration)
 
