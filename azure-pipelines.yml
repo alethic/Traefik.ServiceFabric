@@ -1,19 +1,52 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
+queue:
+    name: FSX
+    timeoutInMinutes: 120
+    cancelTimeoutInMinutes: 30
 
-trigger:
-- master
-
-pool:
-  vmImage: 'ubuntu-latest'
+variables:
+    BuildPlatform: Any CPU
+    BuildConfiguration: Release
 
 steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+- task: NuGetToolInstaller@0
+  displayName: 'Use NuGet 4.7.1'
+  inputs:
+    versionSpec: 4.7.1
 
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+- task: NuGetCommand@2
+  displayName: 'NuGet restore'
+  inputs:
+    restoreSolution: src/Traefik.ServiceFabric.sln
+    vstsFeed: '74a5a491-5c25-48f8-a89a-00d9eded165b'
+
+- task: VSBuild@1
+  displayName: Build Solution
+  inputs:
+    solution: src/Traefik.ServiceFabric.sln
+    vsVersion: 16.0
+    platform: $(BuildPlatform)
+    configuration: $(BuildConfiguration)
+    maximumCpuCount: true
+    msbuildArchitecture: x64
+
+- task: VSBuild@1
+  displayName: Stage Traefik.ServiceFabric
+  inputs:
+    solution: src/Traefik.ServiceFabric.sln
+    msbuildArgs: /t:Traefik_ServiceFabric:Package /p:PackageLocation=$(Build.ArtifactStagingDirectory)\Traefik.ServiceFabric
+    platform: $(BuildPlatform)
+    configuration: $(BuildConfiguration)
+
+- task: ServiceFabricUpdateManifests@2
+  displayName: Update Traefik.ServiceFabric
+  inputs:
+    applicationPackagePath: $(Build.ArtifactStagingDirectory)\Traefik.ServiceFabric
+    versionSuffix: $(Build.BuildNumber)
+    versionBehavior: Replace
+
+- task: PublishBuildArtifacts@1
+  displayName: Publish Artifact Traefik.ServiceFabric
+  inputs:
+    PathtoPublish: $(Build.ArtifactStagingDirectory)\Traefik.ServiceFabric
+    ArtifactName: Traefik.ServiceFabric
+    ArtifactType: Container
