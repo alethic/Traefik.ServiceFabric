@@ -19,7 +19,7 @@
     <Resources>
         <Endpoints>
             <Endpoint Name="TraefikEndpoint" UriScheme="http" Port="19180" />
-            <Endpoint Name="TraefikAPIEndpoint" UriScheme="http" Port="19188" />
+            <Endpoint Name="TraefikApiEndpoint" UriScheme="http" Port="19188" />
         </Endpoints>
     </Resources>
 </ServiceManifest>
