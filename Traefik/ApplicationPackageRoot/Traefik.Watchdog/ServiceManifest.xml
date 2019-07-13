@@ -22,10 +22,10 @@
             </ExeHost>
         </EntryPoint>
         <EnvironmentVariables>
+            <EnvironmentVariable Name="AppInsightsKey" Value="__APIKEY__" />
             <EnvironmentVariable Name="TraefikPort" Value="19180" />
             <EnvironmentVariable Name="TraefikApiPort" Value="19188" />
             <EnvironmentVariable Name="PollIntervalSec" Value="60" />
-            <EnvironmentVariable Name="AppInsightsKey" Value="__APIKEY__" />
         </EnvironmentVariables>
     </CodePackage>
     <Resources>
