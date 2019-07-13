@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="Traefik" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
   <Parameters>
-    <Parameter Name="Traefik.FabricApi_ASPNETCORE_ENVIRONMENT" DefaultValue="" />
     <Parameter Name="Traefik.FabricApi_InstanceCount" DefaultValue="-1" />
     <Parameter Name="Traefik_InstanceCount" DefaultValue="-1" />
     <Parameter Name="Traefik_Port" DefaultValue="19180" />
@@ -31,9 +30,6 @@
         <Endpoint Name="ServiceEndpoint" Port="[Traefik.FabricApi_Port]" />
       </Endpoints>
     </ResourceOverrides>
-    <EnvironmentOverrides CodePackageRef="code">
-      <EnvironmentVariable Name="ASPNETCORE_ENVIRONMENT" Value="[Traefik.FabricApi_ASPNETCORE_ENVIRONMENT]" />
-    </EnvironmentOverrides>
     <Policies>
       <RunAsPolicy CodePackageRef="Code" UserRef="User" EntryPointType="All" />
     </Policies>
