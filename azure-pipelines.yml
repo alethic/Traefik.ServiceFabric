@@ -20,22 +20,15 @@ steps:
     vstsFeed: '74a5a491-5c25-48f8-a89a-00d9eded165b'
 
 - task: VSBuild@1
-  displayName: Build Solution
+  displayName: Package Traefik.ServiceFabric
   inputs:
-    solution: Traefik.ServiceFabric.sln
+    solution: Traefik\Traefik.sfproj
     vsVersion: 16.0
+    msbuildArgs: /t:Package /p:PackageLocation=$(Build.ArtifactStagingDirectory)\Traefik.ServiceFabric
     platform: $(BuildPlatform)
     configuration: $(BuildConfiguration)
     maximumCpuCount: true
     msbuildArchitecture: x64
-
-- task: VSBuild@1
-  displayName: Stage Traefik.ServiceFabric
-  inputs:
-    solution: Traefik\Traefik.sfproj
-    msbuildArgs: /t:Package /p:PackageLocation=$(Build.ArtifactStagingDirectory)\Traefik.ServiceFabric
-    platform: $(BuildPlatform)
-    configuration: $(BuildConfiguration)
 
 - task: ServiceFabricUpdateManifests@2
   displayName: Update Traefik.ServiceFabric
