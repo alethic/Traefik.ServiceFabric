@@ -27,7 +27,6 @@ steps:
     msbuildArgs: /t:Package /p:PackageLocation=$(Build.ArtifactStagingDirectory)\Traefik.ServiceFabric
     platform: $(BuildPlatform)
     configuration: $(BuildConfiguration)
-    maximumCpuCount: true
     msbuildArchitecture: x64
 
 - task: ServiceFabricUpdateManifests@2
