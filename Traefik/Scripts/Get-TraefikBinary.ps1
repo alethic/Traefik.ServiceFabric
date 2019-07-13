@@ -26,7 +26,7 @@ Write-Host $url
 Write-Host "Downloading Traefik Watchdog Binary from:" -foregroundcolor Green
 Write-Host $urlWatchdog
 
-$traefikPath = "/../ApplicationPackageRoot/TraefikPkg/Code/traefik.exe"
+$traefikPath = "/../ApplicationPackageRoot/Traefik/Code/traefik.exe"
 $treafikWatchdogPath = "/../ApplicationPackageRoot/Watchdog/Code/traefik-appinsights-watchdog.exe"
 $outfile = Join-Path $PSScriptRoot $traefikPath
 $outfileWatchdog = Join-Path $PSScriptRoot $treafikWatchdogPath

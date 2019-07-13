@@ -6,11 +6,14 @@
     <CodePackage Name="Code" Version="1.0.0">
         <EntryPoint>
             <ExeHost>
-                <Program>traefik.exe</Program>
-                <Arguments>--configfile=traefik.toml</Arguments>
+                <Program>traefik.bat</Program>
                 <WorkingFolder>CodePackage</WorkingFolder>
+                <ConsoleRedirection FileRetentionCount="2" />
             </ExeHost>
         </EntryPoint>
+        <EnvironmentVariables>
+            <EnvironmentVariable Name="ClusterManagementUrl" Value="http://localhost:19181" />
+        </EnvironmentVariables>
     </CodePackage>
     <ConfigPackage Name="Config" Version="1.0.0" />
     <Resources>

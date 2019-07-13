@@ -28,6 +28,8 @@
     <None Include="Scripts\Get-TraefikBinary.ps1" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ApplicationPackageRoot\Traefik\Code\traefik.ps1" />
+    <Content Include="ApplicationPackageRoot\Traefik\Code\traefik.bat" />
     <Content Include="ApplicationPackageRoot\Traefik\Code\traefik.exe" />
     <Content Include="ApplicationPackageRoot\Traefik\Config\Settings.xml" />
     <Content Include="ApplicationPackageRoot\Traefik\Code\traefik.toml" />
@@ -49,12 +51,12 @@
     <ApplicationProjectTargetsPath>$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Service Fabric Tools\Microsoft.VisualStudio.Azure.Fabric.ApplicationProject.targets</ApplicationProjectTargetsPath>
   </PropertyGroup>
   <Import Project="$(ApplicationProjectTargetsPath)" Condition="Exists('$(ApplicationProjectTargetsPath)')" />
+  <Target Name="GetTraefikBinary" BeforeTargets="Build" Condition="!Exists('ApplicationPackageRoot\Traefik\Code\traefik.exe')">
+    <Exec Command="powershell.exe Scripts\Get-TraefikBinary.ps1 -version v1.7.12" />
+  </Target>
   <Import Project="..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.8\build\Microsoft.VisualStudio.Azure.Fabric.Application.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.8\build\Microsoft.VisualStudio.Azure.Fabric.Application.targets')" />
   <Target Name="ValidateMSBuildFiles" BeforeTargets="PrepareForBuild">
     <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.8\build\Microsoft.VisualStudio.Azure.Fabric.Application.props')" Text="Unable to find the '..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.8\build\Microsoft.VisualStudio.Azure.Fabric.Application.props' file. Please restore the 'Microsoft.VisualStudio.Azure.Fabric.MSBuild' Nuget package." />
     <Error Condition="!Exists('..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.8\build\Microsoft.VisualStudio.Azure.Fabric.Application.targets')" Text="Unable to find the '..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.8\build\Microsoft.VisualStudio.Azure.Fabric.Application.targets' file. Please restore the 'Microsoft.VisualStudio.Azure.Fabric.MSBuild' Nuget package." />
-  </Target>
-  <Target Name="GetTraefikBinary" BeforeTargets="Build" Condition="!Exists('ApplicationPackageRoot\Traefik\Code\traefik.exe')">
-    <Exec Command="powershell.exe Scripts\Get-TraefikBinary.ps1 -version v1.7.12" />
   </Target>
 </Project>
