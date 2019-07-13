@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ServiceManifest Name="Watchdog" Version="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ServiceManifest Name="Traefik.Watchdog" Version="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <ServiceTypes>
-        <StatelessServiceType ServiceTypeName="Watchdog" UseImplicitHost="true">
+        <StatelessServiceType ServiceTypeName="Traefik.Watchdog" UseImplicitHost="true">
             <Extensions>
                 <Extension Name="Traefik">
                     <Labels xmlns="http://schemas.microsoft.com/2015/03/fabact-no-schema">
@@ -30,7 +30,7 @@
     </CodePackage>
     <Resources>
         <Endpoints>
-            <Endpoint Name="WatchdogTestService" UriScheme="http" Port="19182" />
+            <Endpoint Name="ServiceEndpoint" UriScheme="http" Port="19182" />
         </Endpoints>
     </Resources>
 </ServiceManifest>

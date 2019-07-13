@@ -34,9 +34,9 @@
     <Content Include="ApplicationPackageRoot\Traefik\Config\Settings.xml" />
     <Content Include="ApplicationPackageRoot\Traefik\Code\traefik.toml" />
     <Content Include="ApplicationPackageRoot\Traefik\ServiceManifest.xml" />
-    <Content Include="ApplicationPackageRoot\Watchdog\Code\traefik-appinsights-watchdog.bat" />
-    <Content Include="ApplicationPackageRoot\Watchdog\Code\traefik-appinsights-watchdog.exe" />
-    <Content Include="ApplicationPackageRoot\Watchdog\ServiceManifest.xml" />
+    <Content Include="ApplicationPackageRoot\Traefik.Watchdog\Code\traefik-appinsights-watchdog.bat" />
+    <Content Include="ApplicationPackageRoot\Traefik.Watchdog\Code\traefik-appinsights-watchdog.exe" />
+    <Content Include="ApplicationPackageRoot\Traefik.Watchdog\ServiceManifest.xml" />
     <Content Include="ApplicationParameters\Cloud.xml" />
     <Content Include="packages.config" />
     <Content Include="PublishProfiles\Cloud.xml" />

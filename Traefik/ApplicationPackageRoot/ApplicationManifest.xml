@@ -6,8 +6,9 @@
     <Parameter Name="Traefik_Port" DefaultValue="19180" />
     <Parameter Name="Traefik_ApiPort" DefaultValue="19188" />
     <Parameter Name="Traefik.FabricApi_Port" DefaultValue="19181" />
-    <Parameter Name="Watchdog_PollIntervalSec" DefaultValue="60" />
-    <Parameter Name="Watchdog_AppInsightsKey" DefaultValue="__APIKEY__" />
+    <Parameter Name="Traefik.Watchdog_Port" DefaultValue="19182" />
+    <Parameter Name="Traefik.Watchdog_PollIntervalSec" DefaultValue="60" />
+    <Parameter Name="Traefik.Watchdog_AppInsightsKey" DefaultValue="__APIKEY__" />
   </Parameters>
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="Traefik" ServiceManifestVersion="1.0.0" />
@@ -15,7 +16,7 @@
     <ResourceOverrides>
       <Endpoints>
         <Endpoint Name="TraefikEndpoint" Port="[Traefik_Port]" />
-        <Endpoint Name="TraefikAPIEndpoint" Port="[Traefik_ApiPort]" />
+        <Endpoint Name="TraefikApiEndpoint" Port="[Traefik_ApiPort]" />
       </Endpoints>
     </ResourceOverrides>
     <Policies>
@@ -35,12 +36,17 @@
     </Policies>
   </ServiceManifestImport>
   <ServiceManifestImport>
-    <ServiceManifestRef ServiceManifestName="Watchdog" ServiceManifestVersion="1.0.0" />
+    <ServiceManifestRef ServiceManifestName="Traefik.Watchdog" ServiceManifestVersion="1.0.0" />
+    <ResourceOverrides>
+      <Endpoints>
+        <Endpoint Name="ServiceEndpoint" Port="[Traefik.Watchdog_Port]" />
+      </Endpoints>
+    </ResourceOverrides>
     <EnvironmentOverrides CodePackageRef="Code">
       <EnvironmentVariable Name="TraefikPort" Value="[Traefik_Port]" />
       <EnvironmentVariable Name="TraefikApiPort" Value="[Traefik_ApiPort]" />
-      <EnvironmentVariable Name="PollIntervalSec" Value="[Watchdog_PollIntervalSec]" />
-      <EnvironmentVariable Name="AppInsightsKey" Value="[Watchdog_AppInsightsKey]" />
+      <EnvironmentVariable Name="PollIntervalSec" Value="[Traefik.Watchdog_PollIntervalSec]" />
+      <EnvironmentVariable Name="AppInsightsKey" Value="[Traefik.Watchdog_AppInsightsKey]" />
     </EnvironmentOverrides>
     <Policies>
       <RunAsPolicy CodePackageRef="Code" UserRef="User" EntryPointType="All" />
@@ -52,13 +58,13 @@
         <SingletonPartition />
       </StatelessService>
     </Service>
-    <Service Name="Watchdog" ServicePackageActivationMode="ExclusiveProcess">
-      <StatelessService ServiceTypeName="Watchdog" InstanceCount="[Traefik_InstanceCount]">
+    <Service Name="FabricApi" ServicePackageActivationMode="ExclusiveProcess">
+      <StatelessService ServiceTypeName="Traefik.FabricApi" InstanceCount="[Traefik.FabricApi_InstanceCount]">
         <SingletonPartition />
       </StatelessService>
     </Service>
-    <Service Name="Traefik.FabricApi" ServicePackageActivationMode="ExclusiveProcess">
-      <StatelessService ServiceTypeName="Traefik.FabricApi" InstanceCount="[Traefik.FabricApi_InstanceCount]">
+    <Service Name="Watchdog" ServicePackageActivationMode="ExclusiveProcess">
+      <StatelessService ServiceTypeName="Traefik.Watchdog" InstanceCount="[Traefik_InstanceCount]">
         <SingletonPartition />
       </StatelessService>
     </Service>
