@@ -15,6 +15,6 @@ dashboard = true
 debug = true
 
 [servicefabric]
-clustermanagementurl = "http://localhost:19181"
+clustermanagementurl = "%ClusterManagementUrl%"
 apiversion = "3.0"
 
