@@ -103,26 +103,31 @@ namespace Traefik.FabricApi
             u.Path = context.Request.PathBase + context.Request.Path;
             u.Query = context.Request.QueryString.ToUriComponent();
 
-            var request = new HttpRequestMessage();
-            request.Method = HttpMethod.Get;
-            request.RequestUri = u.Uri;
+            using (var request = new HttpRequestMessage())
+            {
+                request.Method = HttpMethod.Get;
+                request.RequestUri = u.Uri;
 
-            // copy incoming headers to API
-            foreach (var h in context.Request.Headers)
-                request.Headers.TryAddWithoutValidation(h.Key, h.Value.Select(i => i));
+                // copy incoming headers to API
+                foreach (var h in context.Request.Headers)
+                    request.Headers.TryAddWithoutValidation(h.Key, h.Value.Select(i => i));
 
-            // reset host header
-            request.Headers.Host = u.Host + ":" + u.Port;
+                // reset host header
+                request.Headers.Host = u.Host + ":" + u.Port;
 
-            // invoke request
-            var response = await client.SendAsync(request);
+                // invoke request
+                using (var response = await client.SendAsync(request))
+                {
+                    context.Response.StatusCode = (int)response.StatusCode;
 
-            // copy response headers from API
-            foreach (var h in response.Headers)
-                context.Response.Headers.Add(h.Key, new StringValues(h.Value.ToArray()));
+                    // copy response headers from API
+                    foreach (var h in response.Headers)
+                        context.Response.Headers.Add(h.Key, new StringValues(h.Value.ToArray()));
 
-            // copy body
-            await response.Content.CopyToAsync(context.Response.Body);
+                    // copy body
+                    await response.Content.CopyToAsync(context.Response.Body);
+                }
+            }
         }
 
     }

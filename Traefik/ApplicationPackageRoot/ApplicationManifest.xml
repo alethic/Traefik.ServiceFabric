@@ -31,9 +31,9 @@
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="Traefik.Watchdog" ServiceManifestVersion="1.0.0" />
     <ResourceOverrides>
-        <Endpoints>
-            <Endpoint Name="ServiceEndpoint" Port="[Traefik.Watchdog_Port]" />
-        </Endpoints>
+      <Endpoints>
+        <Endpoint Name="ServiceEndpoint" Port="[Traefik.Watchdog_Port]" />
+      </Endpoints>
     </ResourceOverrides>
     <EnvironmentOverrides CodePackageRef="Code">
       <EnvironmentVariable Name="TraefikPort" Value="[Traefik_Port]" />
