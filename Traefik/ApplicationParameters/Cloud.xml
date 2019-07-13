@@ -1,6 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Application Name="fabric:/Traefik" xmlns="http://schemas.microsoft.com/2011/01/fabric" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <Parameters>
-    <Parameter Name="Traefik.FabricApi_InstanceCount" Value="-1" />
-  </Parameters>
+    <Parameters>
+        <Parameter Name="Traefik.FabricApi_InstanceCount" Value="-1" />
+        <Parameter Name="Traefik_InstanceCount" Value="-1" />
+        <Parameter Name="Traefik_Port" Value="19180" />
+        <Parameter Name="Traefik_ApiPort" Value="19188" />
+        <Parameter Name="Traefik.FabricApi_Port" Value="19181" />
+        <Parameter Name="Watchdog_PollIntervalSec" Value="60" />
+        <Parameter Name="Watchdog_AppInsightsKey" Value="__APIKEY__" />
+    </Parameters>
 </Application>

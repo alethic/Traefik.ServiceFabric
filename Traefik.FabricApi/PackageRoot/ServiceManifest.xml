@@ -16,6 +16,7 @@
             <ExeHost>
                 <Program>Traefik.FabricApi.exe</Program>
                 <WorkingFolder>CodePackage</WorkingFolder>
+                <ConsoleRedirection FileMaxSizeInKb="65535" FileRetentionCount="2" />
             </ExeHost>
         </EntryPoint>
         <EnvironmentVariables>

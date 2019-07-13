@@ -18,7 +18,7 @@
             <ExeHost>
                 <Program>traefik-appinsights-watchdog.bat</Program>
                 <WorkingFolder>CodePackage</WorkingFolder>
-                <ConsoleRedirection FileRetentionCount="2" />
+                <ConsoleRedirection FileMaxSizeInKb="65535" FileRetentionCount="2" />
             </ExeHost>
         </EntryPoint>
         <EnvironmentVariables>
