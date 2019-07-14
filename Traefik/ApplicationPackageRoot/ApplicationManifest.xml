@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="Traefik" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
   <Parameters>
+    <Parameter Name="Traefik_AccountName" DefaultValue="" />
     <Parameter Name="Traefik_InstanceCount" DefaultValue="-1" />
     <Parameter Name="Traefik_Port" DefaultValue="19180" />
     <Parameter Name="Traefik_ApiPort" DefaultValue="19188" />
@@ -18,6 +19,9 @@
         <Endpoint Name="TraefikApiEndpoint" Port="[Traefik_ApiPort]" />
       </Endpoints>
     </ResourceOverrides>
+    <Policies>
+      <RunAsPolicy CodePackageRef="Code" UserRef="User" />
+    </Policies>
   </ServiceManifestImport>
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="Traefik.FabricApi" ServiceManifestVersion="1.0.0" />
@@ -27,6 +31,9 @@
         <Endpoint Name="ServiceEndpoint" Port="[Traefik.FabricApi_Port]" />
       </Endpoints>
     </ResourceOverrides>
+    <Policies>
+      <RunAsPolicy CodePackageRef="Code" UserRef="User" />
+    </Policies>
   </ServiceManifestImport>
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="Traefik.Watchdog" ServiceManifestVersion="1.0.0" />
@@ -41,6 +48,9 @@
       <EnvironmentVariable Name="PollIntervalSec" Value="[Traefik.Watchdog_PollIntervalSec]" />
       <EnvironmentVariable Name="AppInsightsKey" Value="[Traefik.Watchdog_AppInsightsKey]" />
     </EnvironmentOverrides>
+    <Policies>
+      <RunAsPolicy CodePackageRef="Code" UserRef="User" />
+    </Policies>
   </ServiceManifestImport>
   <DefaultServices>
     <Service Name="Traefik" ServicePackageActivationMode="ExclusiveProcess">
@@ -59,4 +69,9 @@
       </StatelessService>
     </Service>
   </DefaultServices>
+  <Principals>
+    <Users>
+      <User Name="User" AccountType="ManagedServiceAccount" AccountName="[Traefik_AccountName]" />
+    </Users>
+  </Principals>
 </ApplicationManifest>
