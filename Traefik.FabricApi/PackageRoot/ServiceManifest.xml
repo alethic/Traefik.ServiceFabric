@@ -19,9 +19,6 @@
                 <ConsoleRedirection FileMaxSizeInKb="65535" FileRetentionCount="2" />
             </ExeHost>
         </EntryPoint>
-        <EnvironmentVariables>
-            <EnvironmentVariable Name="ASPNETCORE_ENVIRONMENT" Value=""/>
-        </EnvironmentVariables>
     </CodePackage>
 
     <ConfigPackage Name="Config" Version="1.0.0" />
