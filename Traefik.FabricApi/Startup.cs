@@ -51,6 +51,8 @@ namespace Traefik.FabricApi
 
             switch (securityType)
             {
+                case SecurityType.None:
+                    break;
                 case SecurityType.Claims:
                     throw new NotSupportedException();
                 case SecurityType.X509:
@@ -94,6 +96,22 @@ namespace Traefik.FabricApi
         }
 
         /// <summary>
+        /// Returns <c>true</c> if the header is one that should be copied.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        bool ShouldCopyHeader(string name)
+        {
+            switch (name)
+            {
+                case "Host":
+                    return false;
+                default:
+                    return true;
+            }
+        }
+
+        /// <summary>
         /// Forwards a GET request.
         /// </summary>
         /// <param name="context"></param>
@@ -102,7 +120,7 @@ namespace Traefik.FabricApi
         {
             var u = new UriBuilder(apiBasePath);
             u.Path = context.Request.PathBase + context.Request.Path;
-            u.Query = context.Request.QueryString.ToUriComponent();
+            u.Query = context.Request.QueryString.Value.TrimStart('?');
 
             using (var request = new HttpRequestMessage())
             {
@@ -111,11 +129,8 @@ namespace Traefik.FabricApi
 
                 // copy incoming headers to API
                 foreach (var h in context.Request.Headers)
-                    request.Headers.TryAddWithoutValidation(h.Key, h.Value.Select(i => i));
-
-                // reset host header
-                request.Headers.Host = u.Host + ":" + u.Port;
-                request.Headers.Authorization = null;
+                    if (ShouldCopyHeader(h.Key))
+                        request.Headers.TryAddWithoutValidation(h.Key, h.Value.Select(i => i));
 
                 // invoke request
                 using (var response = await client.SendAsync(request))
@@ -125,11 +140,13 @@ namespace Traefik.FabricApi
 
                     // copy response headers from API
                     foreach (var h in response.Headers)
-                        context.Response.Headers.Add(h.Key, new StringValues(h.Value.ToArray()));
+                        if (ShouldCopyHeader(h.Key))
+                            context.Response.Headers.Add(h.Key, new StringValues(h.Value.ToArray()));
 
                     // copy content headers from API
                     foreach (var h in response.Content.Headers)
-                        context.Response.Headers.Add(h.Key, new StringValues(h.Value.ToArray()));
+                        if (ShouldCopyHeader(h.Key))
+                            context.Response.Headers.Add(h.Key, new StringValues(h.Value.ToArray()));
 
                     // copy body
                     await response.Content.CopyToAsync(context.Response.Body);
