@@ -27,6 +27,9 @@
         <Endpoint Name="ServiceEndpoint" Port="[Traefik.FabricApi_Port]" />
       </Endpoints>
     </ResourceOverrides>
+    <Policies>
+      <RunAsPolicy CodePackageRef="Code" UserRef="ApiUser" />
+    </Policies>
   </ServiceManifestImport>
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="Traefik.Watchdog" ServiceManifestVersion="1.0.0" />
@@ -59,4 +62,13 @@
       </StatelessService>
     </Service>
   </DefaultServices>
+  <Principals>
+    <Users>
+      <User Name="ApiUser">
+        <MemberOf>
+          <SystemGroup Name="Administrators" />
+        </MemberOf>
+      </User>
+    </Users>
+  </Principals>
 </ApplicationManifest>
