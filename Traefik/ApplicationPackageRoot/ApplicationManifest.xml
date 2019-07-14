@@ -19,9 +19,6 @@
         <Endpoint Name="TraefikApiEndpoint" Port="[Traefik_ApiPort]" />
       </Endpoints>
     </ResourceOverrides>
-    <Policies>
-      <RunAsPolicy CodePackageRef="Code" UserRef="User" />
-    </Policies>
   </ServiceManifestImport>
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="Traefik.FabricApi" ServiceManifestVersion="1.0.0" />
@@ -31,9 +28,6 @@
         <Endpoint Name="ServiceEndpoint" Port="[Traefik.FabricApi_Port]" />
       </Endpoints>
     </ResourceOverrides>
-    <Policies>
-      <RunAsPolicy CodePackageRef="Code" UserRef="User" />
-    </Policies>
   </ServiceManifestImport>
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="Traefik.Watchdog" ServiceManifestVersion="1.0.0" />
@@ -48,9 +42,6 @@
       <EnvironmentVariable Name="PollIntervalSec" Value="[Traefik.Watchdog_PollIntervalSec]" />
       <EnvironmentVariable Name="AppInsightsKey" Value="[Traefik.Watchdog_AppInsightsKey]" />
     </EnvironmentOverrides>
-    <Policies>
-      <RunAsPolicy CodePackageRef="Code" UserRef="User" />
-    </Policies>
   </ServiceManifestImport>
   <DefaultServices>
     <Service Name="Traefik" ServicePackageActivationMode="ExclusiveProcess">
@@ -69,9 +60,4 @@
       </StatelessService>
     </Service>
   </DefaultServices>
-  <Principals>
-    <Users>
-      <User Name="User" AccountType="ManagedServiceAccount" AccountName="[Traefik_AccountName]" />
-    </Users>
-  </Principals>
 </ApplicationManifest>
