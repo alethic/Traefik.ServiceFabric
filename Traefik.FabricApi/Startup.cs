@@ -27,7 +27,7 @@ namespace Traefik.FabricApi
 
         readonly ILifetimeScope parent;
         readonly HttpClient client;
-        readonly SecurityType securityType;
+        readonly SecurityType securityType = SecurityType.Windows;
 
         ILifetimeScope scope;
 
