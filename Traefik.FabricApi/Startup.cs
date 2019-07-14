@@ -126,6 +126,10 @@ namespace Traefik.FabricApi
                     foreach (var h in response.Headers)
                         context.Response.Headers.Add(h.Key, new StringValues(h.Value.ToArray()));
 
+                    // copy content headers from API
+                    foreach (var h in response.Content.Headers)
+                        context.Response.Headers.Add(h.Key, new StringValues(h.Value.ToArray()));
+
                     // copy body
                     await response.Content.CopyToAsync(context.Response.Body);
                 }
