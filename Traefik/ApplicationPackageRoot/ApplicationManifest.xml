@@ -63,10 +63,13 @@
     </Service>
   </DefaultServices>
   <Principals>
+    <Groups>
+      <Group Name="LocalGroup" />
+    </Groups>
     <Users>
       <User Name="ApiUser">
         <MemberOf>
-          <SystemGroup Name="Administrators" />
+          <Group NameRef="LocalGroup" />
         </MemberOf>
       </User>
     </Users>
