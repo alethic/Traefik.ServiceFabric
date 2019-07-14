@@ -5,6 +5,15 @@
     <Parameter Name="Traefik_InstanceCount" DefaultValue="-1" />
     <Parameter Name="Traefik_Port" DefaultValue="19180" />
     <Parameter Name="Traefik_ApiPort" DefaultValue="19188" />
+    <Parameter Name="Traefik_GraceTimeout" DefaultValue="0s" />
+    <Parameter Name="Traefik_ProvidersThrottleDuration" DefaultValue="2s" />
+    <Parameter Name="Traefik_MaxIdleConnsPerHost" DefaultValue="200" />
+    <Parameter Name="Traefik_RequestAcceptGraceTimeout" DefaultValue="10s" />
+    <Parameter Name="Traefik_ReadTimeout" DefaultValue="0s" />
+    <Parameter Name="Traefik_WriteTimeout" DefaultValue="0s" />
+    <Parameter Name="Traefik_IdleTimeout" DefaultValue="180s" />
+    <Parameter Name="Traefik_DialTimeout" DefaultValue="30s" />
+    <Parameter Name="Traefik_ResponseHeaderTimeout" DefaultValue="0s" />
     <Parameter Name="Traefik.FabricApi_Port" DefaultValue="19181" />
     <Parameter Name="Traefik.Watchdog_Port" DefaultValue="19182" />
     <Parameter Name="Traefik.Watchdog_PollIntervalSec" DefaultValue="60" />
@@ -19,6 +28,17 @@
         <Endpoint Name="TraefikApiEndpoint" Port="[Traefik_ApiPort]" />
       </Endpoints>
     </ResourceOverrides>
+    <EnvironmentOverrides CodePackageRef="Code">
+      <EnvironmentVariable Name="GraceTimeout" Value="[Traefik_GraceTimeout]" />
+      <EnvironmentVariable Name="ProvidersThrottleDuration" Value="[Traefik_ProvidersThrottleDuration]" />
+      <EnvironmentVariable Name="MaxIdleConnsPerHost" Value="[Traefik_MaxIdleConnsPerHost]" />
+      <EnvironmentVariable Name="RequestAcceptGraceTimeout" Value="[Traefik_RequestAcceptGraceTimeout]" />
+      <EnvironmentVariable Name="ReadTimeout" Value="[Traefik_ReadTimeout]" />
+      <EnvironmentVariable Name="WriteTimeout" Value="[Traefik_WriteTimeout]" />
+      <EnvironmentVariable Name="IdleTimeout" Value="[Traefik_IdleTimeout]" />
+      <EnvironmentVariable Name="DialTimeout" Value="[Traefik_DialTimeout]" />
+      <EnvironmentVariable Name="ResponseHeaderTimeout" Value="[Traefik_ResponseHeaderTimeout]" />
+    </EnvironmentOverrides>
   </ServiceManifestImport>
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="Traefik.FabricApi" ServiceManifestVersion="1.0.0" />

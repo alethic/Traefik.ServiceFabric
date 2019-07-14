@@ -1,6 +1,7 @@
 
 debug = true
 logLevel = "INFO"
+checkNewVersion = false
 defaultEntryPoints = [ "http" ]
 
 [entryPoints]
