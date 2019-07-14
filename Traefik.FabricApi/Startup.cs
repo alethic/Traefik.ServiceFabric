@@ -115,6 +115,7 @@ namespace Traefik.FabricApi
 
                 // reset host header
                 request.Headers.Host = u.Host + ":" + u.Port;
+                request.Headers.Authorization = null;
 
                 // invoke request
                 using (var response = await client.SendAsync(request))
