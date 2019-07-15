@@ -9,7 +9,7 @@
     <Parameter Name="Traefik_GraceTimeout" DefaultValue="0s" />
     <Parameter Name="Traefik_ProvidersThrottleDuration" DefaultValue="2s" />
     <Parameter Name="Traefik_MaxIdleConnsPerHost" DefaultValue="200" />
-    <Parameter Name="Traefik_RequestAcceptGraceTimeout" DefaultValue="10s" />
+    <Parameter Name="Traefik_RequestAcceptGraceTimeout" DefaultValue="10s" /> 
     <Parameter Name="Traefik_ReadTimeout" DefaultValue="0s" />
     <Parameter Name="Traefik_WriteTimeout" DefaultValue="0s" />
     <Parameter Name="Traefik_IdleTimeout" DefaultValue="180s" />
