@@ -19,3 +19,4 @@ debug = true
 clustermanagementurl = "%ClusterManagementUrl%"
 apiversion = "3.0"
 
+[retry]
