@@ -5,6 +5,7 @@
     <Parameter Name="Traefik_InstanceCount" DefaultValue="-1" />
     <Parameter Name="Traefik_Port" DefaultValue="19180" />
     <Parameter Name="Traefik_ApiPort" DefaultValue="19188" />
+    <Parameter Name="Traefik_ServiceDnsName" DefaultValue="" />
     <Parameter Name="Traefik_GraceTimeout" DefaultValue="0s" />
     <Parameter Name="Traefik_ProvidersThrottleDuration" DefaultValue="2s" />
     <Parameter Name="Traefik_MaxIdleConnsPerHost" DefaultValue="200" />
@@ -64,7 +65,7 @@
     </EnvironmentOverrides>
   </ServiceManifestImport>
   <DefaultServices>
-    <Service Name="Traefik" ServicePackageActivationMode="ExclusiveProcess">
+    <Service Name="Traefik" ServiceDnsName="[Traefik_ServiceDnsName]" ServicePackageActivationMode="ExclusiveProcess">
       <StatelessService ServiceTypeName="Traefik" InstanceCount="[Traefik_InstanceCount]">
         <SingletonPartition />
       </StatelessService>
