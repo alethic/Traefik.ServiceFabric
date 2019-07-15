@@ -15,6 +15,9 @@ entryPoint = "traefik"
 dashboard = true
 debug = true
 
+[ping]
+entryPoint = "http"
+
 [servicefabric]
 clustermanagementurl = "%ClusterManagementUrl%"
 apiversion = "3.0"
