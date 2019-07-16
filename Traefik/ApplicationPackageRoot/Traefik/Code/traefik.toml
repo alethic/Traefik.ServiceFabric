@@ -19,7 +19,20 @@ debug = true
 entryPoint = "http"
 
 [servicefabric]
-clustermanagementurl = "%ClusterManagementUrl%"
+clustermanagementurl = "http://localhost:%ClusterManagementPort%"
 apiversion = "3.0"
 
 [retry]
+
+[lifeCycle]
+graceTimeOut = "%GraceTimeout%"
+requestAcceptGraceTimeout = "%RequestAcceptGraceTimeout%"
+
+[respondingTimeouts]
+readTimeout = "%ReadTimeout%"
+writeTimeout = "%WriteTimeout%"
+idleTimeout = "%IdleTimeout%"
+
+[forwardingTimeouts]
+dialTimeout = "%DialTimeout%"
+responseHeaderTimeout = "%ResponseHeaderTimeout%"

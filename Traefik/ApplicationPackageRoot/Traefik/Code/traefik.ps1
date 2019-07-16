@@ -1,23 +1,23 @@
 param(
 
     [Parameter(Mandatory)]
-    [string]$ConfigTemplate,
-
-    [Parameter(Mandatory)]
-    [int]$TraefikPort,
-
-    [Parameter(Mandatory)]
-    [int]$TraefikApiPort,
-
-    [Parameter(Mandatory)]
-    [string]$ClusterManagementUrl
+    [string]$Template
 
 )
 
-$cfg = gc $ConfigTemplate
-$cfg = $cfg.Replace('%TraefikPort%', $TraefikPort)
-$cfg = $cfg.Replace('%TraefikApiPort%', $TraefikApiPort)
-$cfg = $cfg.Replace('%ClusterManagementUrl%', $ClusterManagementUrl)
+$cfg = gc $Template
+$cfg = $cfg.Replace('%TraefikPort%', $env:Fabric_Endpoint_TraefikEndpoint)
+$cfg = $cfg.Replace('%TraefikApiPort%', $env:Fabric_Endpoint_TraefikApiEndpoint)
+$cfg = $cfg.Replace('%ClusterManagementPort%', $env:Traefik_ClusterManagementPort)
+$cfg = $cfg.Replace('%ProvidersThrottleDuration%', $env:Traefik_ProvidersThrottleDuration)
+$cfg = $cfg.Replace('%GraceTimeout%', $env:Traefik_GraceTimeout)
+$cfg = $cfg.Replace('%RequestAcceptGraceTimeout%', $env:Traefik_RequestAcceptGraceTimeout)
+$cfg = $cfg.Replace('%MaxIdleConnsPerHost%', $env:Traefik_MaxIdleConnsPerHost)
+$cfg = $cfg.Replace('%ReadTimeout%', $env:Traefik_ReadTimeout)
+$cfg = $cfg.Replace('%WriteTimeout%', $env:Traefik_WriteTimeout)
+$cfg = $cfg.Replace('%IdleTimeout%', $env:Traefik_IdleTimeout)
+$cfg = $cfg.Replace('%DialTimeout%', $env:Traefik_DialTimeout)
+$cfg = $cfg.Replace('%ResponseHeaderTimeout%', $env:Traefik_ResponseHeaderTimeout)
 [IO.File]::WriteAllLines("$env:Fabric_Folder_App_Work\traefik.toml", $cfg)
 
 & .\traefik.exe --configfile=$env:Fabric_Folder_App_Work\traefik.toml
