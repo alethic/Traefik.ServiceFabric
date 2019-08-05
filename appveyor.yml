@@ -11,7 +11,7 @@ before_build:
   - ps: $env:AssemblyVersion=$env:GitVersion_AssemblySemVer
   - ps: $env:FileVersion=$GitVersion_AssemblySemFileVer
   - ps: $env:InformationalVersion=$env:GitVersion_InformationalVersion
-  - ps: $env:ServiceFabricPackageName="Traefik.ServiceFabric-$($env:GitVersion_NuGetVersion)"
+  - ps: $env:ServiceFabricPackageName="Traefik-$($env:GitVersion_NuGetVersion)"
   - ps: $env:BuildPath=(Resolve-Path .)
   - nuget restore
   - dotnet restore
