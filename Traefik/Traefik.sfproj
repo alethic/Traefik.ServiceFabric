@@ -9,13 +9,13 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
   </PropertyGroup>
   <ItemGroup Label="ProjectConfigurations">
-    <ProjectConfiguration Include="Debug|x64">
+    <ProjectConfiguration Include="Debug|AnyCPU">
       <Configuration>Debug</Configuration>
-      <Platform>x64</Platform>
+      <Platform>AnyCPU</Platform>
     </ProjectConfiguration>
-    <ProjectConfiguration Include="Release|x64">
+    <ProjectConfiguration Include="Release|AnyCPU">
       <Configuration>Release</Configuration>
-      <Platform>x64</Platform>
+      <Platform>AnyCPU</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
