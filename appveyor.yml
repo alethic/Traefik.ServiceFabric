@@ -13,7 +13,8 @@ before_build:
   - ps: $env:InformationalVersion=$env:GitVersion_InformationalVersion
   - ps: $env:ServiceFabricPackageName="Traefik-$($env:GitVersion_NuGetVersion)"
   - ps: $env:BuildPath=(Resolve-Path .)
-  - nuget restore Traefik.ServiceFabric.sln
+  - nuget restore
+  - nuget restore Traefik/Traefik.sfproj
   - dotnet restore
 
 build_script:
