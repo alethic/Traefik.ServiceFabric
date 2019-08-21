@@ -5,6 +5,8 @@ param(
 
 )
 
+$ErrorActionPreference = "Stop"
+
 $cfg = gc $Template
 $cfg = $cfg.Replace('%TraefikPort%', $env:Fabric_Endpoint_TraefikEndpoint)
 $cfg = $cfg.Replace('%TraefikApiPort%', $env:Fabric_Endpoint_TraefikApiEndpoint)
@@ -21,3 +23,6 @@ $cfg = $cfg.Replace('%ResponseHeaderTimeout%', $env:Traefik_ResponseHeaderTimeou
 [IO.File]::WriteAllLines("$env:Fabric_Folder_App_Work\traefik.toml", $cfg)
 
 & .\traefik.exe --configfile=$env:Fabric_Folder_App_Work\traefik.toml
+if ($LASTEXITCODE -ne 0) {
+    exit $LASTEXITCODE
+}
