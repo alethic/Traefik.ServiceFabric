@@ -5,7 +5,7 @@
     <Parameter Name="Traefik_Port" DefaultValue="19180" />
     <Parameter Name="Traefik_ApiPort" DefaultValue="19188" />
     <Parameter Name="Traefik_ServiceDnsName" DefaultValue="" />
-    <Parameter Name="Traefik_GraceTimeout" DefaultValue="0s" />
+    <Parameter Name="Traefik_GraceTimeout" DefaultValue="10s" />
     <Parameter Name="Traefik_ProvidersThrottleDuration" DefaultValue="2s" />
     <Parameter Name="Traefik_MaxIdleConnsPerHost" DefaultValue="200" />
     <Parameter Name="Traefik_RequestAcceptGraceTimeout" DefaultValue="10s" />
