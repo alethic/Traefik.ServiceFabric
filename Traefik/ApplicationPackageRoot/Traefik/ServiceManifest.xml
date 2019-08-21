@@ -13,7 +13,7 @@
         </EntryPoint>
         <EnvironmentVariables>
             <EnvironmentVariable Name="Traefik_ClusterManagementPort" Value="19181" />
-            <EnvironmentVariable Name="Traefik_GraceTimeout" Value="10s" />
+            <EnvironmentVariable Name="Traefik_GraceTimeout" Value="0s" />
             <EnvironmentVariable Name="Traefik_ProvidersThrottleDuration" Value="2s" />
             <EnvironmentVariable Name="Traefik_MaxIdleConnsPerHost" Value="200" />
             <EnvironmentVariable Name="Traefik_RequestAcceptGraceTimeout" Value="10s" />
