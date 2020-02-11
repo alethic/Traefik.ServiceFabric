@@ -3,42 +3,32 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-using Autofac;
-using Autofac.Extensions.DependencyInjection;
-
 using Cogito.Autofac;
 
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
 using Microsoft.ServiceFabric.Common.Security;
 
 namespace Traefik.FabricApi
 {
 
-    [RegisterAs(typeof(Startup))]
-    public class Startup
+    [RegisterAs(typeof(ApiWebServiceStartup))]
+    public class ApiWebServiceStartup
     {
 
         static readonly Uri apiBasePath = new Uri("http://localhost:19080/");
 
-        readonly ILifetimeScope parent;
         readonly HttpClient client;
         readonly SecurityType securityType = SecurityType.Windows;
-
-        ILifetimeScope scope;
 
         /// <summary>
         /// Initializes a new instance.
         /// </summary>
-        /// <param name="parent"></param>
-        public Startup(ILifetimeScope parent)
+        public ApiWebServiceStartup()
         {
-            this.parent = parent ?? throw new ArgumentNullException(nameof(parent));
-            this.client = CreateHttpClient();
+            client = CreateHttpClient();
         }
 
         /// <summary>
@@ -66,20 +56,10 @@ namespace Traefik.FabricApi
         }
 
         /// <summary>
-        /// Registers framework dependencies.
-        /// </summary>
-        /// <param name="services"></param>
-        public IServiceProvider ConfigureServices(IServiceCollection services)
-        {
-            return new AutofacServiceProvider(scope = parent.BeginLifetimeScope(builder => builder.Populate(services)));
-        }
-
-        /// <summary>
         /// Configures the application.
         /// </summary>
         /// <param name="app"></param>
-        /// <param name="applicationLifetime"></param>
-        public void Configure(IApplicationBuilder app, IApplicationLifetime applicationLifetime)
+        public void Configure(IApplicationBuilder app)
         {
             app.Use(async (ctx, next) =>
             {
@@ -91,8 +71,6 @@ namespace Traefik.FabricApi
 
                 await next();
             });
-
-            applicationLifetime.ApplicationStopped.Register(() => scope.Dispose());
         }
 
         /// <summary>

@@ -15,9 +15,6 @@
     <Parameter Name="Traefik_DialTimeout" DefaultValue="30s" />
     <Parameter Name="Traefik_ResponseHeaderTimeout" DefaultValue="0s" />
     <Parameter Name="Traefik.FabricApi_Port" DefaultValue="19181" />
-    <Parameter Name="Traefik.Watchdog_Port" DefaultValue="19182" />
-    <Parameter Name="Traefik.Watchdog_PollIntervalSec" DefaultValue="60" />
-    <Parameter Name="Traefik.Watchdog_AppInsightsKey" DefaultValue="__APIKEY__" />
   </Parameters>
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="Traefik" ServiceManifestVersion="1.0.0" />
@@ -50,33 +47,14 @@
       </Endpoints>
     </ResourceOverrides>
   </ServiceManifestImport>
-  <ServiceManifestImport>
-    <ServiceManifestRef ServiceManifestName="Traefik.Watchdog" ServiceManifestVersion="1.0.0" />
-    <ResourceOverrides>
-      <Endpoints>
-        <Endpoint Name="ServiceEndpoint" Port="[Traefik.Watchdog_Port]" />
-      </Endpoints>
-    </ResourceOverrides>
-    <EnvironmentOverrides CodePackageRef="Code">
-      <EnvironmentVariable Name="TraefikPort" Value="[Traefik_Port]" />
-      <EnvironmentVariable Name="TraefikApiPort" Value="[Traefik_ApiPort]" />
-      <EnvironmentVariable Name="PollIntervalSec" Value="[Traefik.Watchdog_PollIntervalSec]" />
-      <EnvironmentVariable Name="AppInsightsKey" Value="[Traefik.Watchdog_AppInsightsKey]" />
-    </EnvironmentOverrides>
-  </ServiceManifestImport>
   <DefaultServices>
     <Service Name="Traefik" ServiceDnsName="[Traefik_ServiceDnsName]" ServicePackageActivationMode="ExclusiveProcess">
       <StatelessService ServiceTypeName="Traefik" InstanceCount="[Traefik_InstanceCount]">
         <SingletonPartition />
       </StatelessService>
     </Service>
-    <Service Name="FabricApi" ServicePackageActivationMode="ExclusiveProcess">
+    <Service Name="Traefik.FabricApi" ServicePackageActivationMode="ExclusiveProcess">
       <StatelessService ServiceTypeName="Traefik.FabricApi" InstanceCount="[Traefik_InstanceCount]">
-        <SingletonPartition />
-      </StatelessService>
-    </Service>
-    <Service Name="Watchdog" ServicePackageActivationMode="ExclusiveProcess">
-      <StatelessService ServiceTypeName="Traefik.Watchdog" InstanceCount="[Traefik_InstanceCount]">
         <SingletonPartition />
       </StatelessService>
     </Service>

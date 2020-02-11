@@ -2,10 +2,8 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using Autofac;
-using Autofac.Integration.ServiceFabric;
 
 using Cogito.Autofac;
-using Cogito.ServiceFabric.AspNetCore.Kestrel.Autofac;
 
 namespace Traefik.FabricApi
 {
@@ -22,8 +20,6 @@ namespace Traefik.FabricApi
         {
             var builder = new ContainerBuilder();
             builder.RegisterAllAssemblyModules();
-            builder.RegisterServiceFabricSupport();
-            builder.RegisterStatelessKestrelWebService<Startup>("Traefik.FabricApi", "ServiceEndpoint");
 
             using (builder.Build())
                 await Task.Delay(Timeout.Infinite);

@@ -4,8 +4,7 @@
 # 
 
 param(
-    [string]$version,
-    [string]$urlWatchdog = "https://github.com/lawrencegripper/traefik-appinsights-watchdog/releases/download/20190114085656-a7e73a9/traefik-appinsights-watchdog.exe"
+    [string]$version
 )
 
 while (!($version)) {
@@ -23,20 +22,17 @@ $url = $traefikBaseUrl + $version + "/traefik_windows-amd64.exe"
 
 Write-Host "Downloading Traefik Binary from: " -foregroundcolor Green
 Write-Host $url
-Write-Host "Downloading Traefik Watchdog Binary from:" -foregroundcolor Green
-Write-Host $urlWatchdog
 
 $traefikPath = "/../ApplicationPackageRoot/Traefik/Code/traefik.exe"
-$treafikWatchdogPath = "/../ApplicationPackageRoot/Traefik.Watchdog/Code/traefik-appinsights-watchdog.exe"
-$outfile = Join-Path $PSScriptRoot $traefikPath
-$outfileWatchdog = Join-Path $PSScriptRoot $treafikWatchdogPath
+$traefikTempPath = "/../ApplicationPackageRoot/Traefik/Code/traefik.exe.tmp"
+$outFile = Join-Path $PSScriptRoot $traefikPath
+$outTempFile = Join-Path $PSScriptRoot $traefikTempPath
 
-Invoke-WebRequest -Uri $url -OutFile $outfile -UseBasicParsing
-Invoke-WebRequest -Uri $urlWatchdog -OutFile $outfileWatchdog -UseBasicParsing
+Invoke-WebRequest -Uri $url -OutFile $outTempFile -UseBasicParsing
+Move-Item $outTempFile $outFile -Force
 
 Write-Host "Download complete, files:" -foregroundcolor Green
 Write-Host $outfile
-Write-Host $outfileWatchdog
 
 Write-Host "Traefik version downloaded:" -foregroundcolor Green
 
