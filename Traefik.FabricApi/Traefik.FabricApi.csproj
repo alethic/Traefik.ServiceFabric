@@ -15,10 +15,10 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Cogito.AspNetCore.Autofac" Version="2.0.6" />
-        <PackageReference Include="Cogito.Extensions.Logging.Serilog.Autofac" Version="2.0.4" />
-        <PackageReference Include="Cogito.ServiceFabric.AspNetCore.Kestrel.Autofac" Version="2.0.26" />
-        <PackageReference Include="Microsoft.ServiceFabric.Client.Http" Version="3.0.0" />
+        <PackageReference Include="Cogito.AspNetCore.Autofac" Version="2.0.8" />
+        <PackageReference Include="Cogito.Extensions.Logging.Serilog.Autofac" Version="2.0.5" />
+        <PackageReference Include="Cogito.ServiceFabric.AspNetCore.Kestrel.Autofac" Version="2.0.32" />
+        <PackageReference Include="Microsoft.ServiceFabric.Client.Http" Version="3.0.1" />
     </ItemGroup>
 
 </Project>

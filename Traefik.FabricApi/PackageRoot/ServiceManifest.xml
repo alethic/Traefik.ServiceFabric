@@ -22,7 +22,7 @@
     </CodePackage>
 
     <ConfigPackage Name="Config" Version="1.0.0" />
-
+    
     <Resources>
         <Endpoints>
             <Endpoint Protocol="http" Name="ServiceEndpoint" Type="Input" Port="19181" />

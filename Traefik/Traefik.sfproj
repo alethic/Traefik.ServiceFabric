@@ -39,9 +39,7 @@
     <Content Include="PublishProfiles\Cloud.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Traefik.FabricApi\Traefik.FabricApi.csproj">
-      <ServiceLaunchUrl>http://{MachineName}:{ServicePort}/api/values</ServiceLaunchUrl>
-    </ProjectReference>
+    <ProjectReference Include="..\Traefik.FabricApi\Traefik.FabricApi.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
   <PropertyGroup>
@@ -49,7 +47,7 @@
   </PropertyGroup>
   <Import Project="$(ApplicationProjectTargetsPath)" Condition="Exists('$(ApplicationProjectTargetsPath)')" />
   <Target Name="GetTraefikBinary" BeforeTargets="Build" Condition="!Exists('ApplicationPackageRoot\Traefik\Code\traefik.exe')">
-    <Exec Command="powershell.exe Scripts\Get-TraefikBinary.ps1 -version v1.7.20" />
+    <Exec Command="powershell.exe Scripts\Get-TraefikBinary.ps1 -version v1.7.21" />
   </Target>
   <Import Project="..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.9\build\Microsoft.VisualStudio.Azure.Fabric.Application.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.9\build\Microsoft.VisualStudio.Azure.Fabric.Application.targets')" />
   <Target Name="ValidateMSBuildFiles" BeforeTargets="PrepareForBuild">
