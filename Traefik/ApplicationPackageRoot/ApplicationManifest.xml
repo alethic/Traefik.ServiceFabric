@@ -5,15 +5,15 @@
     <Parameter Name="Traefik_Port" DefaultValue="19180" />
     <Parameter Name="Traefik_ApiPort" DefaultValue="19188" />
     <Parameter Name="Traefik_ServiceDnsName" DefaultValue="" />
-    <Parameter Name="Traefik_GraceTimeout" DefaultValue="0s" />
-    <Parameter Name="Traefik_ProvidersThrottleDuration" DefaultValue="2s" />
-    <Parameter Name="Traefik_MaxIdleConnsPerHost" DefaultValue="200" />
-    <Parameter Name="Traefik_RequestAcceptGraceTimeout" DefaultValue="10s" />
+    <Parameter Name="Traefik_MaxIdleConnsPerHost" DefaultValue="2" />
+    <Parameter Name="Traefik_DialTimeout" DefaultValue="30s" />
+    <Parameter Name="Traefik_ResponseHeaderTimeout" DefaultValue="0s" />
+    <Parameter Name="Traefik_IdleConnTimeout" DefaultValue="90s" />
+    <Parameter Name="Traefik_RequestAcceptGraceTimeout" DefaultValue="0s" />
+    <Parameter Name="Traefik_GraceTimeout" DefaultValue="10s" />
     <Parameter Name="Traefik_ReadTimeout" DefaultValue="0s" />
     <Parameter Name="Traefik_WriteTimeout" DefaultValue="0s" />
     <Parameter Name="Traefik_IdleTimeout" DefaultValue="180s" />
-    <Parameter Name="Traefik_DialTimeout" DefaultValue="30s" />
-    <Parameter Name="Traefik_ResponseHeaderTimeout" DefaultValue="0s" />
     <Parameter Name="Traefik.FabricApi_Port" DefaultValue="19181" />
   </Parameters>
   <ServiceManifestImport>
@@ -27,15 +27,15 @@
     </ResourceOverrides>
     <EnvironmentOverrides CodePackageRef="Code">
       <EnvironmentVariable Name="Traefik_ClusterManagementPort" Value="[Traefik.FabricApi_Port]" />
-      <EnvironmentVariable Name="Traefik_GraceTimeout" Value="[Traefik_GraceTimeout]" />
-      <EnvironmentVariable Name="Traefik_ProvidersThrottleDuration" Value="[Traefik_ProvidersThrottleDuration]" />
       <EnvironmentVariable Name="Traefik_MaxIdleConnsPerHost" Value="[Traefik_MaxIdleConnsPerHost]" />
+      <EnvironmentVariable Name="Traefik_DialTimeout" Value="[Traefik_DialTimeout]" />
+      <EnvironmentVariable Name="Traefik_ResponseHeaderTimeout" Value="[Traefik_ResponseHeaderTimeout]" />
+      <EnvironmentVariable Name="Traefik_IdleConnTimeout" Value="[Traefik_IdleConnTimeout]" />
       <EnvironmentVariable Name="Traefik_RequestAcceptGraceTimeout" Value="[Traefik_RequestAcceptGraceTimeout]" />
+      <EnvironmentVariable Name="Traefik_GraceTimeout" Value="[Traefik_GraceTimeout]" />
       <EnvironmentVariable Name="Traefik_ReadTimeout" Value="[Traefik_ReadTimeout]" />
       <EnvironmentVariable Name="Traefik_WriteTimeout" Value="[Traefik_WriteTimeout]" />
       <EnvironmentVariable Name="Traefik_IdleTimeout" Value="[Traefik_IdleTimeout]" />
-      <EnvironmentVariable Name="Traefik_DialTimeout" Value="[Traefik_DialTimeout]" />
-      <EnvironmentVariable Name="Traefik_ResponseHeaderTimeout" Value="[Traefik_ResponseHeaderTimeout]" />
     </EnvironmentOverrides>
   </ServiceManifestImport>
   <ServiceManifestImport>

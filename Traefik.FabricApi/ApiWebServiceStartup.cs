@@ -80,13 +80,11 @@ namespace Traefik.FabricApi
         /// <returns></returns>
         bool ShouldCopyHeader(string name)
         {
-            switch (name)
+            return name switch
             {
-                case "Host":
-                    return false;
-                default:
-                    return true;
-            }
+                "Host" => false,
+                _ => true,
+            };
         }
 
         /// <summary>

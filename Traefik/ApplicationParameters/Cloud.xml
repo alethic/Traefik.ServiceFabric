@@ -6,7 +6,5 @@
         <Parameter Name="Traefik_Port" Value="19180" />
         <Parameter Name="Traefik_ApiPort" Value="19188" />
         <Parameter Name="Traefik.FabricApi_Port" Value="19181" />
-        <Parameter Name="Watchdog_PollIntervalSec" Value="60" />
-        <Parameter Name="Watchdog_AppInsightsKey" Value="__APIKEY__" />
     </Parameters>
 </Application>

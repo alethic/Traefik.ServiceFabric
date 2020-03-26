@@ -18,18 +18,19 @@ while (!($version)) {
 [Net.ServicePointManager]::SecurityProtocol = "tls12, tls11, tls"
 
 $traefikBaseUrl = "https://github.com/containous/traefik/releases/download/"
-$url = $traefikBaseUrl + $version + "/traefik_windows-amd64.exe"
+$url = $traefikBaseUrl + $version + "/traefik_${version}_windows_amd64.zip"
 
 Write-Host "Downloading Traefik Binary from: " -foregroundcolor Green
 Write-Host $url
 
-$traefikPath = "/../ApplicationPackageRoot/Traefik/Code/traefik.exe"
-$traefikTempPath = "/../ApplicationPackageRoot/Traefik/Code/traefik.exe.tmp"
-$outFile = Join-Path $PSScriptRoot $traefikPath
-$outTempFile = Join-Path $PSScriptRoot $traefikTempPath
+$zipFile = Join-Path ([System.IO.Path]::GetTempPath()) "traefik.zip"
+$zipDir = Join-Path ([System.IO.Path]::GetTempPath()) "traefik"
+Invoke-WebRequest -Uri $url -OutFile $zipFile -UseBasicParsing
+Expand-Archive -Path $zipFile -DestinationPath $zipDir
 
-Invoke-WebRequest -Uri $url -OutFile $outTempFile -UseBasicParsing
-Move-Item $outTempFile $outFile -Force
+$traefikPath = "/../ApplicationPackageRoot/Traefik/Code/traefik.exe"
+$outFile = Join-Path $PSScriptRoot $traefikPath
+Copy-Item "$zipDir/traefik.exe" $outFile
 
 Write-Host "Download complete, files:" -foregroundcolor Green
 Write-Host $outfile

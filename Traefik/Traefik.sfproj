@@ -47,7 +47,7 @@
   </PropertyGroup>
   <Import Project="$(ApplicationProjectTargetsPath)" Condition="Exists('$(ApplicationProjectTargetsPath)')" />
   <Target Name="GetTraefikBinary" BeforeTargets="Build" Condition="!Exists('ApplicationPackageRoot\Traefik\Code\traefik.exe')">
-    <Exec Command="powershell.exe Scripts\Get-TraefikBinary.ps1 -version v1.7.21" />
+    <Exec Command="powershell.exe Scripts\Get-TraefikBinary.ps1 -version v2.1.8" />
   </Target>
   <Import Project="..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.9\build\Microsoft.VisualStudio.Azure.Fabric.Application.targets" Condition="Exists('..\packages\Microsoft.VisualStudio.Azure.Fabric.MSBuild.1.6.9\build\Microsoft.VisualStudio.Azure.Fabric.Application.targets')" />
   <Target Name="ValidateMSBuildFiles" BeforeTargets="PrepareForBuild">

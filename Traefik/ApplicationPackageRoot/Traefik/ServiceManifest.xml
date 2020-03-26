@@ -13,15 +13,15 @@
         </EntryPoint>
         <EnvironmentVariables>
             <EnvironmentVariable Name="Traefik_ClusterManagementPort" Value="19181" />
-            <EnvironmentVariable Name="Traefik_GraceTimeout" Value="0s" />
-            <EnvironmentVariable Name="Traefik_ProvidersThrottleDuration" Value="2s" />
-            <EnvironmentVariable Name="Traefik_MaxIdleConnsPerHost" Value="200" />
-            <EnvironmentVariable Name="Traefik_RequestAcceptGraceTimeout" Value="10s" />
+            <EnvironmentVariable Name="Traefik_MaxIdleConnsPerHost" Value="2" />
+            <EnvironmentVariable Name="Traefik_DialTimeout" Value="30s" />
+            <EnvironmentVariable Name="Traefik_ResponseHeaderTimeout" Value="0s" />
+            <EnvironmentVariable Name="Traefik_IdleConnTimeout" Value="90s" />
+            <EnvironmentVariable Name="Traefik_RequestAcceptGraceTimeout" Value="0s" />
+            <EnvironmentVariable Name="Traefik_GraceTimeout" Value="10s" />
             <EnvironmentVariable Name="Traefik_ReadTimeout" Value="0s" />
             <EnvironmentVariable Name="Traefik_WriteTimeout" Value="0s" />
             <EnvironmentVariable Name="Traefik_IdleTimeout" Value="180s" />
-            <EnvironmentVariable Name="Traefik_DialTimeout" Value="30s" />
-            <EnvironmentVariable Name="Traefik_ResponseHeaderTimeout" Value="0s" />
         </EnvironmentVariables>
     </CodePackage>
     <ConfigPackage Name="Config" Version="1.0.0" />

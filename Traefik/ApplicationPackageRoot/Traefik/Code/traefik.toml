@@ -4,35 +4,38 @@ logLevel = "INFO"
 checkNewVersion = false
 defaultEntryPoints = [ "http" ]
 
+[serverTransport]
+maxIdleConnsPerHost = "%MaxIdleConnsPerHost%"
+[serverTransport.forwardingTimeouts]
+dialTimeout = "%DialTimeout%"
+responseHeaderTimeout = "%ResponseHeaderTimeout%"
+idleConnTimeout = "%IdleConnTimeout%"
+
 [entryPoints]
 [entryPoints.traefik]
 address = ":%TraefikApiPort%"
 [entryPoints.http]
 address = ":%TraefikPort%"
+[entryPoints.http.transport]
+[entryPoints.http.transport.lifeCycle]
+requestAcceptGraceTimeout = "%RequestAcceptGraceTimeout%"
+graceTimeOut = "%GraceTimeout%"
+[entryPoints.http.transport.respondingTimeouts]
+readTimeout = "%ReadTimeout%"
+writeTimeout = "%WriteTimeout%"
+idleTimeout = "%IdleTimeout%"
 
 [api]
-entryPoint = "traefik"
+insecure = true
 dashboard = true
 debug = true
 
 [ping]
 entryPoint = "http"
 
-[servicefabric]
-clustermanagementurl = "http://localhost:%ClusterManagementPort%"
-apiversion = "3.0"
+[providers]
+[providers.file]
+directory = "%TraefikConfDir%"
+watch = true
 
 [retry]
-
-[lifeCycle]
-graceTimeOut = "%GraceTimeout%"
-requestAcceptGraceTimeout = "%RequestAcceptGraceTimeout%"
-
-[respondingTimeouts]
-readTimeout = "%ReadTimeout%"
-writeTimeout = "%WriteTimeout%"
-idleTimeout = "%IdleTimeout%"
-
-[forwardingTimeouts]
-dialTimeout = "%DialTimeout%"
-responseHeaderTimeout = "%ResponseHeaderTimeout%"

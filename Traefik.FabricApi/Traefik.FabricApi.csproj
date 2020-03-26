@@ -19,6 +19,7 @@
         <PackageReference Include="Cogito.Extensions.Logging.Serilog.Autofac" Version="2.0.5" />
         <PackageReference Include="Cogito.ServiceFabric.AspNetCore.Kestrel.Autofac" Version="2.0.32" />
         <PackageReference Include="Microsoft.ServiceFabric.Client.Http" Version="3.0.1" />
+        <PackageReference Include="YamlDotNet" Version="8.1.0" />
     </ItemGroup>
 
 </Project>

@@ -1,4 +1,6 @@
-﻿using Autofac;
+﻿using System.Fabric;
+
+using Autofac;
 
 using Cogito.Autofac;
 
